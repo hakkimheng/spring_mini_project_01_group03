@@ -35,9 +35,14 @@ public class AppUser extends BaseEntity implements UserDetails {
     @Column(unique = true)
     private String phoneNumber;
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.getRoleName()));
+        String r = role.getRoleName();
+        return List.of(
+                new SimpleGrantedAuthority("ROLE_" + r),
+                new SimpleGrantedAuthority(r)
+        );
     }
 
     @Override

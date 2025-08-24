@@ -40,6 +40,7 @@ public class JwtService {
         Map<String, Object> claims = new HashMap<>();
         AppUser appUser = (AppUser) userDetails;
         claims.put("user_id", appUser.getId());
+        claims.put("user_role",appUser.getRole());
         return createToken(claims, appUser.getEmail());
     }
 
