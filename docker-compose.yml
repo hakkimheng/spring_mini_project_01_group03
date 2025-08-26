@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-123}
       POSTGRES_DB: ${POSTGRES_DB:-postgres}
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - pgData:/var/lib/postgresql/data
     healthcheck:
@@ -30,7 +30,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 20
-
+      
   app:
     build: .
     depends_on:
