@@ -24,7 +24,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    @Operation(description = "Get current user. can be used by all roles")
+    @Operation(summary = "Get current user. can be used by all roles")
     public ResponseEntity<ApiResponse<AppUserResponse>> getUser() {
 
         ApiResponse<AppUserResponse> response = ApiResponse.<AppUserResponse>builder()
@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @PutMapping
-    @Operation(description = "Update current user can be use by all roles")
+    @Operation(summary = "Update current user can be use by all roles")
     public ResponseEntity<ApiResponse<AppUserResponse>> updateUser(@RequestBody UserRequest authRequest){
 
         ApiResponse<AppUserResponse> response = ApiResponse.<AppUserResponse>builder()
