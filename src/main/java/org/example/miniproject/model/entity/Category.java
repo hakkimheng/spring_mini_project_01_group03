@@ -24,7 +24,9 @@ public class Category {
     private LocalDateTime createAt = LocalDateTime.now();
     @Builder.Default
     private LocalDateTime updateAt = LocalDateTime.now();
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private AppUser appUser;
 
     public CategoryResponse categoryResponse(){
         return CategoryResponse.builder()
