@@ -12,4 +12,10 @@ public interface CategoryService {
     CategoryResponse createCategory(CategoryRequest categoryRequest);
 
     ApiResponseWithPagination<CategoryResponse> getAllCategory(@Positive Integer page, Integer size, CategoryProperties categoryProperties, Sort.Direction direction);
+
+    CategoryResponse getCategoryById(Integer categoryId);
+
+    CategoryResponse updateCategoryById(Integer categoryId, CategoryRequest categoryRequest);
+
+    void deleteCategoryById(Integer categoryId);
 }

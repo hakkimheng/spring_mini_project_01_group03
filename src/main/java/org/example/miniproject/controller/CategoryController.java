@@ -30,8 +30,7 @@ public class CategoryController extends BaseResponse{
     @Operation(summary = "Create new category.can be used by only AUTHOR role")
     @PostMapping
     public ResponseEntity<ApiResponse<CategoryResponse>> createCategory(@RequestBody CategoryRequest categoryRequest){
-        CategoryResponse payload = categoryService.createCategory(categoryRequest);
-        return responseEntity(true,"Created new category successfully", HttpStatus.CREATED,payload);
+        return responseEntity(true,"Created new category successfully", HttpStatus.CREATED,categoryService.createCategory(categoryRequest));
     }
 
     @PreAuthorize("hasRole('AUTHOR')")
@@ -41,7 +40,30 @@ public class CategoryController extends BaseResponse{
                                                                                                    @RequestParam(defaultValue = "10") Integer size,
                                                                                                    @RequestParam(required = false) CategoryProperties categoryProperties,
                                                                                                    @RequestParam(required = false) Sort.Direction direction){
-        System.out.println("clicked");
         return responseEntity(true,"Get all categories successfully",HttpStatus.OK,categoryService.getAllCategory(page,size,categoryProperties,direction));
+    }
+
+    @PreAuthorize("hasRole('AUTHOR')")
+    @Operation(summary = "Get category by id.can be used by only AUTHOR role")
+    @GetMapping("/{categoryId}")
+    public ResponseEntity<ApiResponse<CategoryResponse>> getCategoryById(@RequestParam Integer categoryId){
+        return responseEntity(true,"Get category by id successfully",HttpStatus.OK,categoryService.getCategoryById(categoryId));
+    }
+
+
+    @PreAuthorize("hasRole('AUTHOR')")
+    @Operation(summary = "Update category by id.can be used by only AUTHOR role")
+    @PutMapping("/{categoryId}")
+    public ResponseEntity<ApiResponse<CategoryResponse>> updateCategoryById(@RequestParam Integer categoryId, @RequestBody CategoryRequest categoryRequest){
+        return responseEntity(true,"Get category by id successfully",HttpStatus.OK,categoryService.updateCategoryById(categoryId,categoryRequest));
+    }
+
+
+    @PreAuthorize("hasRole('AUTHOR')")
+    @Operation(summary = "Delete category by id.can be used by only AUTHOR role")
+    @DeleteMapping("/{categoryId}")
+    public ResponseEntity<ApiResponse<Void>> deleteCategoryById(@RequestParam Integer categoryId){
+        categoryService.deleteCategoryById(categoryId);
+        return responseEntity(true,"Get category by id successfully",HttpStatus.OK,null);
     }
 }
