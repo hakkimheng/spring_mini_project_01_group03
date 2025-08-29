@@ -41,6 +41,14 @@ authentication, user management, articles, comments, and categories.
 
 ------------------------------------------------------------------------
 
+### 🔖 Bookmark
+
+-   `GET /api/v1/bookmarks` → Get all articles which has added bookmark by current user id
+-   `POST /api/v1/bookmarks/{article-id` → Add bookmark on article
+-   `DELETE /api/v1/bookmarks/{article-id}` → Delete bookmark on article
+
+------------------------------------------------------------------------
+
 ### 📂 Category (AUTHOR only)
 
 -   `GET /api/v1/categories/{categoryId}` → Get category by ID
