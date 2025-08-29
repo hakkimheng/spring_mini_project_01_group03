@@ -7,8 +7,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ArticleProperties {
     articleId("id"),
-    articleName("articleName"),
-    createAt("createAt");
+    articleName("title"),
+    createdAt("createdAt");
 
     private final String property;
 }
