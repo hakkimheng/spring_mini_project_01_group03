@@ -3,7 +3,7 @@ spring:
     name: mini-project
   datasource:
     username: postgres
-    password: 1234
+    password: keat6951
     url: jdbc:postgresql://localhost:5432/postgres
   jpa:
     hibernate:

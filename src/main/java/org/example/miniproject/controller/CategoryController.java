@@ -47,7 +47,7 @@ public class CategoryController extends BaseResponse{
     @Operation(summary = "Get category by id.can be used by only AUTHOR role")
     @GetMapping("/{categoryId}")
     public ResponseEntity<ApiResponse<CategoryResponse>> getCategoryById(@RequestParam Integer categoryId){
-        return responseEntity(true,"Get category by id successfully",HttpStatus.OK,categoryService.getCategoryById(categoryId));
+        return responseEntity(true,"Get category by id successfully",HttpStatus.OK,categoryService.getCategoryById(categoryId).categoryResponse());
     }
 
 

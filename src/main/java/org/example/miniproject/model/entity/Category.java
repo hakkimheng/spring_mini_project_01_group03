@@ -5,6 +5,7 @@ import lombok.*;
 import org.example.miniproject.model.dto.response.CategoryResponse;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Setter
 @Getter
@@ -13,28 +14,27 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "categories")
 @Builder
-public class Category {
+@AttributeOverride(name = "id", column = @Column(name = "category_id"))
+public class Category extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer categoryId;
     private String categoryName;
     private Integer amountArticle;
-    @Builder.Default
-    private LocalDateTime createAt = LocalDateTime.now();
-    @Builder.Default
-    private LocalDateTime updateAt = LocalDateTime.now();
+
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CategoryArticle> categoryArticles;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private AppUser appUser;
 
+
     public CategoryResponse categoryResponse(){
         return CategoryResponse.builder()
-                .categoryId(this.categoryId)
+                .categoryId(getId())
                 .amountOfArticles(this.amountArticle)
                 .categoryName(this.categoryName)
-                .createAt(this.createAt)
-                .updateAt(this.updateAt)
+                .createAt(this.getCreatedAt())
+                .updateAt(this.getUpdatedAt())
                 .build();
     }
 
