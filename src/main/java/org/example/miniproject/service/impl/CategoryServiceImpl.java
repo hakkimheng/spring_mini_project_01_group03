@@ -21,6 +21,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Locale;
+
 import static org.example.miniproject.model.dto.response.ApiResponseWithPagination.itemsAndPaginationResponse;
 
 @Service
@@ -31,6 +33,10 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryResponse createCategory(CategoryRequest categoryRequest) {
+        String checkNameCategory = categoryRequest.getCategoryName().toUpperCase(Locale.ROOT).trim();
+        Boolean isDuplicateName = categoryRepository.existsByCategoryNameIgnoreCase(checkNameCategory);
+        if(isDuplicateName) throw new BadRequestException("Category name already exists");
+
         return categoryRepository.save(categoryRequest.toEntity(userService.getUser())).categoryResponse();
     }
 
@@ -57,13 +63,14 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryResponse updateCategoryById(Integer categoryId, CategoryRequest categoryRequest) {
         Category category = getCategoryById(categoryId);
-        category.setCategoryName(categoryRequest.getCategoryName());
+        category.setCategoryName(categoryRequest.getCategoryName().trim());
         return categoryRepository.save(category).categoryResponse();
     }
 
     @Override
     public void deleteCategoryById(Integer categoryId) {
         Category category = getCategoryById(categoryId);
+        category.setAppUser(null);
         if (category.getAmountArticle()>0) {
             throw new BadRequestException("this category is already been used");
         }

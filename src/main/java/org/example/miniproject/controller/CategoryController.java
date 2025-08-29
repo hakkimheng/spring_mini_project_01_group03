@@ -3,6 +3,7 @@ package org.example.miniproject.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.example.miniproject.model.dto.request.CategoryRequest;
@@ -56,8 +57,8 @@ public class CategoryController extends BaseResponse{
     @PreAuthorize("hasRole('AUTHOR')")
     @Operation(summary = "Update category by id.can be used by only AUTHOR role")
     @PutMapping("/{categoryId}")
-    public ResponseEntity<ApiResponse<CategoryResponse>> updateCategoryById(@RequestParam Integer categoryId, @RequestBody CategoryRequest categoryRequest){
-        return responseEntity(true,"Get category by id successfully",HttpStatus.OK,categoryService.updateCategoryById(categoryId,categoryRequest));
+    public ResponseEntity<ApiResponse<CategoryResponse>> updateCategoryById(@RequestParam Integer categoryId, @Valid @RequestBody CategoryRequest categoryRequest){
+        return responseEntity(true,"update category by id successfully",HttpStatus.OK,categoryService.updateCategoryById(categoryId,categoryRequest));
     }
 
 
@@ -66,6 +67,6 @@ public class CategoryController extends BaseResponse{
     @DeleteMapping("/{categoryId}")
     public ResponseEntity<ApiResponse<Void>> deleteCategoryById(@RequestParam Integer categoryId){
         categoryService.deleteCategoryById(categoryId);
-        return responseEntity(true,"Get category by id successfully",HttpStatus.OK,null);
+        return responseEntity(true,"Deleted category successfully",HttpStatus.OK,null);
     }
 }
