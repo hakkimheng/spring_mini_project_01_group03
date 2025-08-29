@@ -3,8 +3,8 @@ spring:
     name: mini-project
   datasource:
     username: postgres
-    password: keat6951
-    url: jdbc:postgresql://localhost:5432/postgres
+    password: 123
+    url: jdbc:postgresql://localhost:5433/postgres
   jpa:
     hibernate:
       ddl-auto: update

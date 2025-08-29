@@ -33,6 +33,9 @@ public class Article extends BaseEntity {
     @JoinColumn(name = "user_id")
     private AppUser appUser;
 
+    @OneToMany(mappedBy = "article")
+    private List<BookMark> bookMarks = new ArrayList<>();
+
     public ArticleResponse toResponse() {
         List<String> categoryNames =
                 (category == null ? List.<CategoryArticle>of() : category).stream()
