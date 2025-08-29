@@ -2,6 +2,7 @@ package org.example.miniproject.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.example.miniproject.model.dto.response.ApiResponse;
@@ -20,6 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/bookmarks")
 @SecurityRequirement(name = "bearerAuth")
+@Tag(name = "Bookmark")
 public class BookMarkController extends BaseResponse {
 
     private final BookMarkService bookMarkService;
