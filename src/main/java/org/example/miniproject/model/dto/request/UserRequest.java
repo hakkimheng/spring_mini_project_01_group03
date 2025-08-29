@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserRequest {
 
-    @Schema(description = "User phone number", example = "012 123 123")
+    @Schema(description = "User phone number", example = "+855123123")
     @NotNull
     @NotBlank
     @Size(max = 255)
