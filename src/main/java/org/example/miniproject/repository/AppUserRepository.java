@@ -1,12 +1,13 @@
 package org.example.miniproject.repository;
 
 import org.example.miniproject.model.entity.AppUser;
+import org.example.miniproject.util.AuthUtil;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AppUserRepository extends JpaRepository<AppUser,Long> {
+public interface AppUserRepository extends JpaRepository<AppUser,Integer> {
     UserDetails findAppUserByEmail(String email);
 
     boolean existsByUsername(String username);

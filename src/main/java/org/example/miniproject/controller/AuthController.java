@@ -1,6 +1,7 @@
 package org.example.miniproject.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.example.miniproject.jwt.JwtService;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth")
+@Tag(name = "Authentication")
 public class AuthController extends BaseResponse {
     private final AppUserService appUserService;
     private final AuthenticationManager authenticationManager;
@@ -34,7 +36,7 @@ public class AuthController extends BaseResponse {
     @Operation(summary = "Register a new user")
     @PostMapping("/register")
     public ResponseEntity<ApiResponse<AppUserResponse>> register(@RequestBody AppUserRequest appUserRequest){
-        return responseEntity(true,"Successfully authenticated", HttpStatus.OK,appUserService.register(appUserRequest));
+        return responseEntity(true,"User registered successfully", HttpStatus.OK,appUserService.register(appUserRequest));
     }
 
     @SneakyThrows

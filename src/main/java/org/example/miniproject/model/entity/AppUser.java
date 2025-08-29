@@ -35,6 +35,14 @@ public class AppUser extends BaseEntity implements UserDetails {
     @Column(unique = true)
     private String phoneNumber;
 
+    @OneToMany(mappedBy = "appUser")
+    private List<Category> category;
+
+    @OneToMany(mappedBy = "appUser")
+    private List<Article> article;
+
+    @OneToMany(mappedBy = "appUser")
+    private List<Comment> comment;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
