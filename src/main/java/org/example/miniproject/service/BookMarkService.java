@@ -10,7 +10,7 @@ import org.springframework.data.domain.Sort;
 public interface BookMarkService {
 
     ArticleResponse markArticleById(Integer id);
-    ApiResponse<?> deleteMarkArticleById(Integer id);
+    void deleteMarkArticleById(Integer id);
     ApiResponseWithPagination<ArticleResponse> getAllBookMarksByCurrentUser(@Positive Integer page, Integer size, Sort.Direction direction);
 
 }
