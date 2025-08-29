@@ -12,7 +12,6 @@ import java.util.Optional;
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
     Optional<Category> findByIdAndAppUserId(Integer categoryId, Integer currentUserId);
-    Boolean existsByCategoryNameIgnoreCase(String name);
     Page<Category> findAllByAppUserId(Integer appUserId, Pageable pageable);
-
+    Boolean existsByCategoryNameIgnoreCaseAndAppUserId(String checkNameCategory, Integer userIdOfCurrentUser);
 }

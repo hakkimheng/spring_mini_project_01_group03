@@ -34,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryResponse createCategory(CategoryRequest categoryRequest) {
         String checkNameCategory = categoryRequest.getCategoryName().toUpperCase(Locale.ROOT).trim();
-        Boolean isDuplicateName = categoryRepository.existsByCategoryNameIgnoreCase(checkNameCategory);
+        Boolean isDuplicateName = categoryRepository.existsByCategoryNameIgnoreCaseAndAppUserId(checkNameCategory,AuthUtil.getUserIdOfCurrentUser());
         if(isDuplicateName) throw new BadRequestException("Category name already exists");
 
         return categoryRepository.save(categoryRequest.toEntity(userService.getUser())).categoryResponse();
