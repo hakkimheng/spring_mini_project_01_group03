@@ -3,6 +3,7 @@ package org.example.miniproject.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.miniproject.model.dto.request.UserRequest;
 import org.example.miniproject.model.dto.response.ApiResponse;
@@ -40,7 +41,7 @@ public class UserController {
 
     @PutMapping
     @Operation(summary = "Update current user can be use by all roles")
-    public ResponseEntity<ApiResponse<AppUserResponse>> updateUser(@RequestBody UserRequest authRequest){
+    public ResponseEntity<ApiResponse<AppUserResponse>> updateUser(@RequestBody @Valid UserRequest authRequest){
 
         ApiResponse<AppUserResponse> response = ApiResponse.<AppUserResponse>builder()
                 .timestamps(Instant.now())

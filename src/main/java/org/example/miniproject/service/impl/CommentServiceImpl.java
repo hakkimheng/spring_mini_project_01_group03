@@ -27,7 +27,7 @@ public class CommentServiceImpl implements CommentService {
     private final AppUserRepository appUserRepository;
 
     @Override
-    public Comment createComment(CommentRequest request , Integer articleId) {
+    public ArticleWithListCommentResponse createComment(CommentRequest request , Integer articleId) {
         AppUser appUser = appUserRepository.findById(AuthUtil.getUserIdOfCurrentUser()).orElseThrow(
                 () -> new NotFoundException("AppUser not found")
         );
@@ -39,7 +39,14 @@ public class CommentServiceImpl implements CommentService {
                 .article(article)
                 .content(request.getContent().trim())
                 .build();
-        return commentRepository.save(comment);
+        commentRepository.save(comment);
+        List<CommentResponse> commentResponses = commentRepository.findAllByArticleId(articleId).stream()
+                .map(Comment::toCommentResponse)
+                .toList();
+        return ArticleWithListCommentResponse.builder()
+                .article(article.toResponse())
+                .comment(commentResponses)
+                .build();
     }
 
     @Override

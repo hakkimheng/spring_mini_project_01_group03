@@ -7,12 +7,12 @@ authentication, user management, articles, comments, and categories.
 
 ## 👥 Team Members
 
--   **Heng Chakriya**
--   **Keo Kimleang**
--   **Hak Kimheng**
--   **Oeng Sikeat**
--   **Sroun David**
--   **Y Chanphyrat**
+-   **Heng Chakriya**   →   (**Category-controller**)
+-   **Keo Kimleang**    →   (**Auth-controller**)
+-   **Hak Kimheng**     →   (**Comment-controller**)
+-   **Oeng Sikeat**     →   (**Article-controller**)
+-   **Sroun Davit**     →   (**User-controller**)
+-   **Y Chanphyrat**    →   (**Bookmark-controller**)
 
 ------------------------------------------------------------------------
 
@@ -38,6 +38,14 @@ authentication, user management, articles, comments, and categories.
 -   `GET /api/v1/comment/{comment-id}` → Get your own comment by ID
 -   `PUT /api/v1/comment/{comment-id}` → Update your own comment
 -   `DELETE /api/v1/comment/{comment-id}` → Delete your own comment
+
+------------------------------------------------------------------------
+
+### 🔖 Bookmark
+
+-   `GET /api/v1/bookmarks` → Get all articles which has added bookmark by current user id
+-   `POST /api/v1/bookmarks/{article-id}` → Add bookmark on article
+-   `DELETE /api/v1/bookmarks/{article-id}` → Delete bookmark on article
 
 ------------------------------------------------------------------------
 

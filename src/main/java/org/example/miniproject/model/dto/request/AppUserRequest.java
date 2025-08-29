@@ -33,10 +33,14 @@ public class AppUserRequest {
     @Size(max = 255)
     private String email;
 
-    @Schema(description = "User password", example = "123")
+    @Schema(description = "User password", example = "Password@123")
     @NotNull
-    @NotBlank
-    @Size(max = 255)
+    @Size(max = 20)
+    @NotBlank(message = "Password cannot be blank")
+    @Pattern(
+            regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$",
+            message = "Password must be 8–20 characters long, include at least one uppercase, one lowercase, one digit, and one special character"
+    )
     private String password;
 
     @Schema(description = "User phone number", example = "012 123 123")
