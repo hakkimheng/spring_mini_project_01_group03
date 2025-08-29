@@ -89,7 +89,7 @@ authentication, user management, articles, comments, and categories.
 ``` bash
 # Clone repository
 git clone https://github.com/hakkimheng/spring_mini_project_01_group03
-cd mini-project
+cd spring_mini_project_01_group03
 #open docker desktop
 docker compose up -d
 # Run the application
