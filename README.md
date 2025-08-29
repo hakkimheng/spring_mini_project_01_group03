@@ -1,6 +1,6 @@
 # 📝 Mini Project 001
 
-A simple **Blog Management API** built with Spring Boot that supports
+A simple **Article Management API** built with Spring Boot that supports
 authentication, user management, articles, comments, and categories.
 
 ------------------------------------------------------------------------
