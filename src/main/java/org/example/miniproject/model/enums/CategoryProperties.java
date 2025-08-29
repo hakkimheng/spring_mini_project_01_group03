@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 public enum CategoryProperties {
     categoryId("id"),
     categoryName("categoryName"),
-    createAt("createAt");
+    createdAt("createdAt");
 
     private final String property;
 }
