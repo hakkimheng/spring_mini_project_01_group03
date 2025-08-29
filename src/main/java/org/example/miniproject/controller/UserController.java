@@ -2,6 +2,7 @@ package org.example.miniproject.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.example.miniproject.model.dto.request.UserRequest;
 import org.example.miniproject.model.dto.response.ApiResponse;
@@ -19,6 +20,7 @@ import java.time.Instant;
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
 @SecurityRequirement(name = "bearerAuth")
+@Tag(name = "User Information")
 public class UserController {
 
     private final UserService userService;

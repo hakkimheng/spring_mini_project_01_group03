@@ -42,8 +42,10 @@ public class AppUser extends BaseEntity implements UserDetails {
     private List<Article> article;
 
     @OneToMany(mappedBy = "appUser")
+
     private List<BookMark> bookMarks;
 
+    private List<Comment> comment;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
