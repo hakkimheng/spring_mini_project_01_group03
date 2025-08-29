@@ -93,7 +93,7 @@ cd spring_mini_project_01_group03
 #open docker desktop
 docker compose up -d
 # Run the application
-./mvnw spring-boot:run
+./gradlew bootRun
 ```
 
 ------------------------------------------------------------------------
