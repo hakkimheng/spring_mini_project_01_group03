@@ -49,7 +49,7 @@ public class ArticleController extends BaseResponse {
     @GetMapping
     @Operation(summary = "Get all articles.can be used by all roles")
     public ResponseEntity<ApiResponse<ApiResponseWithPagination<ArticleResponse>>> getAllArticles(@RequestParam(defaultValue = "1") @Positive Integer page,
-                                                                                                  @RequestParam(defaultValue = "10") Integer size,
+                                                                                                  @RequestParam(defaultValue = "10") @Positive Integer size,
                                                                                                   @RequestParam(required = false) ArticleProperties articleProperties,
                                                                                                   @RequestParam(required = false) Sort.Direction direction) {
         return responseEntity(true,"get all articles successfully",HttpStatus.OK,articleService.getAllArticles(page,size,articleProperties,direction));
@@ -75,7 +75,7 @@ public class ArticleController extends BaseResponse {
 
     @PostMapping("/{article-id}/comments")
     @Operation(summary = "Comment on specific article, can be used to create comment on specific article by all roles")
-    public ResponseEntity<ApiResponse<ArticleWithListCommentResponse>> addComment(@RequestBody CommentRequest request ,
+    public ResponseEntity<ApiResponse<ArticleWithListCommentResponse>> addComment(@RequestBody @Valid CommentRequest request ,
                                                                               @PathVariable("article-id") Integer articleId) {
         return responseEntity(true,"Created new comment successfully",
                 HttpStatus.CREATED,commentService.createComment(request, articleId));

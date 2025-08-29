@@ -2,6 +2,7 @@ package org.example.miniproject.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.example.miniproject.jwt.JwtService;
@@ -35,14 +36,14 @@ public class AuthController extends BaseResponse {
 
     @Operation(summary = "Register a new user")
     @PostMapping("/register")
-    public ResponseEntity<ApiResponse<AppUserResponse>> register(@RequestBody AppUserRequest appUserRequest){
+    public ResponseEntity<ApiResponse<AppUserResponse>> register(@RequestBody @Valid AppUserRequest appUserRequest){
         return responseEntity(true,"User registered successfully", HttpStatus.OK,appUserService.register(appUserRequest));
     }
 
     @SneakyThrows
     @Operation(summary = "Login with email and password")
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse<AuthResponse>> login(@RequestBody @jakarta.validation.Valid AuthRequest authRequest){
+    public ResponseEntity<ApiResponse<AuthResponse>> login(@RequestBody @Valid AuthRequest authRequest){
         authenticate(authRequest.getEmail(), authRequest.getPassword());
         UserDetails user = appUserService.loadUserByUsername(authRequest.getEmail());
         String access  = jwtService.generateToken(user);
