@@ -34,10 +34,10 @@ public class Article extends BaseEntity {
     private AppUser appUser;
 
     @OneToMany(mappedBy = "article")
-
     private List<BookMark> bookMarks = new ArrayList<>();
 
-    private List<Comment> comment;
+    @OneToMany(mappedBy = "article")
+    private List<Comment> comment = new ArrayList<>();
 
 
     public ArticleResponse toResponse() {

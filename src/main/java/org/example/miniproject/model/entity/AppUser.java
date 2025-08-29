@@ -42,9 +42,9 @@ public class AppUser extends BaseEntity implements UserDetails {
     private List<Article> article;
 
     @OneToMany(mappedBy = "appUser")
-
     private List<BookMark> bookMarks;
 
+    @OneToMany(mappedBy = "appUser")
     private List<Comment> comment;
 
     @Override
