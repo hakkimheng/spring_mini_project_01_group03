@@ -54,6 +54,8 @@ public class ArticleServiceImpl implements ArticleService {
                     article(article).
                     build());
         }
+
+        article.setCategory(categoryArticles);
         List<CategoryArticle> categoryArticlesList = categoryArticleRepository.saveAll(categoryArticles);
         return CategoryArticle.toResponse(categoryArticlesList);
     }
@@ -112,10 +114,20 @@ public class ArticleServiceImpl implements ArticleService {
         return CategoryArticle.toResponse(saved);
     }
 
-    @Override
+    @Transactional
     public void deleteArticleById(Integer articleId) {
-        Article article = getArticleById(articleId);
-        articleRepository.delete(article);
+        Article a = getArticleById(articleId);
+
+        List<Category> deletedArticles = a.getCategory().stream()
+                .map(CategoryArticle::getCategory)
+                .toList();
+
+        articleRepository.delete(a);
+
+        deletedArticles.forEach(c -> {
+            c.setAmountArticle(c.getAmountArticle() - 1);
+            categoryRepository.save(c);
+        });
     }
 
 }
