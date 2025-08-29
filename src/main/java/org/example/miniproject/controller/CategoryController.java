@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/categories")
 @RequiredArgsConstructor
 @SecurityRequirement(name = "bearerAuth")
-@Tag(name = "Category")
+@Tag(name = "Category ")
 public class CategoryController extends BaseResponse{
 
     private final CategoryService categoryService;

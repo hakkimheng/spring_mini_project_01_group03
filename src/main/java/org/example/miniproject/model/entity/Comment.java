@@ -5,9 +5,6 @@ import lombok.*;
 import org.example.miniproject.model.dto.response.ArticleWithCommentResponse;
 import org.example.miniproject.model.dto.response.CommentResponse;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor
 @Setter

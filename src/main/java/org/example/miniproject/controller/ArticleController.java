@@ -75,10 +75,10 @@ public class ArticleController extends BaseResponse {
 
     @PostMapping("/{article-id}/comments")
     @Operation(summary = "Comment on specific article, can be used to create comment on specific article by all roles")
-    public ResponseEntity<ApiResponse<ArticleWithCommentResponse>> addComment(@RequestBody CommentRequest request ,
+    public ResponseEntity<ApiResponse<ArticleWithListCommentResponse>> addComment(@RequestBody CommentRequest request ,
                                                                               @PathVariable("article-id") Integer articleId) {
         return responseEntity(true,"Created new comment successfully",
-                HttpStatus.CREATED,commentService.createComment(request, articleId).toArticleAndCommentResponse());
+                HttpStatus.CREATED,commentService.createComment(request, articleId));
     }
 
 

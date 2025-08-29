@@ -9,7 +9,7 @@ import org.example.miniproject.model.entity.Comment;
 import java.util.List;
 
 public interface CommentService {
-    Comment createComment(CommentRequest request, Integer articleId);
+    ArticleWithListCommentResponse createComment(CommentRequest request, Integer articleId);
 
     ArticleWithListCommentResponse getAllCommentByArticleId(Integer articleId);
 
