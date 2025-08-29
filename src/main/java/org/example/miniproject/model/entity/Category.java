@@ -17,6 +17,7 @@ import java.util.List;
 @AttributeOverride(name = "id", column = @Column(name = "category_id"))
 public class Category extends BaseEntity{
 
+    @Column(unique = true)
     private String categoryName;
 
     @Builder.Default
