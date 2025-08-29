@@ -18,7 +18,7 @@ public class ApiResponse<T> {
 
     private Boolean success;
     private String message;
-    private HttpStatus status;
+    private HttpStatus status ;
 
     private T payload;
     @Builder.Default

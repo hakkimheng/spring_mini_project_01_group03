@@ -34,6 +34,18 @@ public abstract class BaseResponse {
         );
     }
 
+    // no payload and status code
+    public <T> ResponseEntity<ApiResponse<T>> responseEntity(Boolean success,String message) {
+
+        ApiResponse<T> apiResponse = ApiResponse.<T>builder()
+                .success(success)
+                .message(message)
+                .build();
+        return new ResponseEntity<>(apiResponse,
+                apiResponse.getStatus()
+        );
+    }
+
 
     // Don't Edit It
     public ResponseEntity<ProblemDetail> problemDetailResponseEntity(Map<?,?> errors) {

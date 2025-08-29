@@ -34,7 +34,11 @@ public class Article extends BaseEntity {
     private AppUser appUser;
 
     @OneToMany(mappedBy = "article")
+
+    private List<BookMark> bookMarks = new ArrayList<>();
+
     private List<Comment> comment;
+
 
     public ArticleResponse toResponse() {
         List<String> categoryNames =
