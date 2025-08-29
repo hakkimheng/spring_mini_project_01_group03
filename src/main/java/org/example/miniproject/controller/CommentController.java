@@ -3,6 +3,7 @@ package org.example.miniproject.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.example.miniproject.model.dto.request.CommentRequest;
 import org.example.miniproject.model.dto.response.ApiResponse;
@@ -38,7 +39,7 @@ class CommentController extends BaseResponse {
 
     @PutMapping("/{comment-id}")
     @Operation(summary = "Update comment by comment id, can update only your own comment")
-    public ResponseEntity<ApiResponse<CommentResponse>> updateComment(@PathVariable("comment-id") Integer commentId, @RequestBody CommentRequest commentRequest){
+    public ResponseEntity<ApiResponse<CommentResponse>> updateComment(@PathVariable("comment-id") Integer commentId, @RequestBody @Valid CommentRequest commentRequest){
         return responseEntity(true , "Updated comment successfully",HttpStatus.OK,commentService.updateCommentById(commentId , commentRequest).toCommentResponse());
     }
 

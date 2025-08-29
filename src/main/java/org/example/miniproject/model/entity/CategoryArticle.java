@@ -32,7 +32,7 @@ public class CategoryArticle extends BaseEntity{
                 .title(article.getTitle())
                 .description(article.getDescription())
                 .appUserId(article.getAppUser().getId())
-                .categories(categoryArticlesList.stream().map(categoryArticle -> categoryArticle.getArticle().getTitle()).toList())
+                .categories(categoryArticlesList.stream().map(categoryArticle -> categoryArticle.getCategory().getCategoryName()).toList())
                 .createdAt(article.getCreatedAt())
                 .updatedAt(article.getUpdatedAt())
                 .build();

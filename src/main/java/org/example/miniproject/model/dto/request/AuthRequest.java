@@ -26,7 +26,7 @@ public class AuthRequest {
     @NotBlank
     @Schema(
             description = "User password",
-            example = "123"
+            example = "Password@123"
     )
     private String password;
 }

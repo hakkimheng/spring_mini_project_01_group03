@@ -29,7 +29,7 @@ public class Article extends BaseEntity {
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CategoryArticle> category = new ArrayList<>();
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private AppUser appUser;
 
@@ -43,13 +43,12 @@ public class Article extends BaseEntity {
     public ArticleResponse toResponse() {
         List<String> categoryNames =
                 (category == null ? List.<CategoryArticle>of() : category).stream()
-                        .map(CategoryArticle::getCategory)
-                        .map(Category::getCategoryName)
+                        .map(categoryArticle -> categoryArticle.getCategory().getCategoryName())
                         .toList();
         return ArticleResponse.builder()
                 .articleId(getId())
-                .title(title)
-                .description(description)
+                .title(this.title)
+                .description(this.description)
                 .appUserId(appUser.getId())
                 .categories(categoryNames)
                 .createdAt(getCreatedAt())
