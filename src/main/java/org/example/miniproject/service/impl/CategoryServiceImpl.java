@@ -28,16 +28,10 @@ import static org.example.miniproject.model.dto.response.ApiResponseWithPaginati
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
     private final UserService userService;
-    private final CategoryArticleRepository categoryArticleRepository;
 
     @Override
     public CategoryResponse createCategory(CategoryRequest categoryRequest) {
-        Category category = Category.builder()
-                .categoryName(categoryRequest.getCategoryName())
-                .amountArticle(0)
-                .appUser(userService.getUser())
-                .build();
-        return categoryRepository.save(category).categoryResponse();
+        return categoryRepository.save(categoryRequest.toEntity(userService.getUser())).categoryResponse();
     }
 
     @Override
@@ -50,7 +44,6 @@ public class CategoryServiceImpl implements CategoryService {
         Integer currentUserId = AuthUtil.getUserIdOfCurrentUser();
         Page<Category> pageOfCategory = categoryRepository
                 .findAllByAppUserId(currentUserId,(PageRequest.of(page - 1, size, sortBy)));
-
         return itemsAndPaginationResponse(pageOfCategory.map(Category::categoryResponse));
     }
 
@@ -63,7 +56,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryResponse updateCategoryById(Integer categoryId, CategoryRequest categoryRequest) {
-
         Category category = getCategoryById(categoryId);
         category.setCategoryName(categoryRequest.getCategoryName());
         return categoryRepository.save(category).categoryResponse();

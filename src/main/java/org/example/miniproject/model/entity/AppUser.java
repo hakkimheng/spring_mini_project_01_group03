@@ -40,6 +40,10 @@ public class AppUser extends BaseEntity implements UserDetails {
 
     @OneToMany(mappedBy = "appUser")
     private List<Article> article;
+
+    @OneToMany(mappedBy = "appUser")
+    private List<Comment> comment;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         String r = role.getRoleName();

@@ -18,8 +18,9 @@ import java.util.List;
 public class Category extends BaseEntity{
 
     private String categoryName;
-    private Integer amountArticle;
 
+    @Builder.Default
+    private Integer amountArticle = 0;
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CategoryArticle> categoryArticles;
 
