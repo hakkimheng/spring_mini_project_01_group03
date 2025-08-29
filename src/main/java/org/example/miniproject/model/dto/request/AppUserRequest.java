@@ -65,7 +65,7 @@ public class AppUserRequest {
     public AppUser toEntity(PasswordEncoder passwordEncoder) {
         return AppUser.builder()
                 .username(username)
-                .email(email)
+                .email(email.toLowerCase())
                 .password(passwordEncoder.encode(password))
                 .phoneNumber(phoneNumber)
                 .address(address)

@@ -44,8 +44,8 @@ public class AuthController extends BaseResponse {
     @Operation(summary = "Login with email and password")
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<AuthResponse>> login(@RequestBody @Valid AuthRequest authRequest){
-        authenticate(authRequest.getEmail(), authRequest.getPassword());
-        UserDetails user = appUserService.loadUserByUsername(authRequest.getEmail());
+        authenticate(authRequest.getEmail().toLowerCase(), authRequest.getPassword());
+        UserDetails user = appUserService.loadUserByUsername(authRequest.getEmail().toLowerCase());
         String access  = jwtService.generateToken(user);
         String refresh = refreshTokenService.create((AppUser) user);
         AuthResponse payload = AuthResponse.builder()
@@ -60,7 +60,7 @@ public class AuthController extends BaseResponse {
     public ResponseEntity<ApiResponse<AuthResponse>> refresh(@RequestParam String refreshToken) {
         String email = refreshTokenService.verifyAndConsume(refreshToken);
         // 2. load user and rotate tokens
-        UserDetails user = appUserService.loadUserByUsername(email);
+        UserDetails user = appUserService.loadUserByUsername(email.toLowerCase());
         String newAccess  = jwtService.generateToken(user);
 
         AuthResponse payload = AuthResponse.builder()
@@ -73,7 +73,7 @@ public class AuthController extends BaseResponse {
 
     private void authenticate(String email, String password) throws Exception {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email.toLowerCase(), password));
         } catch (DisabledException e) {
             throw new Exception("USER_DISABLED", e);
         } catch (BadCredentialsException e) {
