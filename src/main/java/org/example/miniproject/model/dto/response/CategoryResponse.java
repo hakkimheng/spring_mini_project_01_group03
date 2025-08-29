@@ -2,6 +2,7 @@ package org.example.miniproject.model.dto.response;
 
 import lombok.*;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Setter
@@ -13,6 +14,6 @@ public class CategoryResponse {
     private Integer categoryId;
     private String categoryName;
     private Integer amountOfArticles;
-    private LocalDateTime createAt;
-    private LocalDateTime updateAt;
+    private Instant createAt;
+    private Instant updateAt;
 }

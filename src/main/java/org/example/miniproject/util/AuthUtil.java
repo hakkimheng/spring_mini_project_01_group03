@@ -4,10 +4,10 @@ import org.example.miniproject.model.entity.AppUser;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public class AuthUtil {
-    public static Long getUserIdOfCurrentUser() {
+    public static Integer getUserIdOfCurrentUser() {
         AppUser appUser = (AppUser) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
-        Long userId = appUser.getId();
+        Integer userId = appUser.getId();
         return userId;
     }
 

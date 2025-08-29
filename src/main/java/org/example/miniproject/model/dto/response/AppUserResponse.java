@@ -13,7 +13,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @Builder
 public class AppUserResponse {
-    private Long userId;
+    private Integer userId;
     private String username;
     private String email;
     private String phoneNumber;

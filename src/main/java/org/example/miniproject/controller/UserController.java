@@ -31,7 +31,7 @@ public class UserController {
                 .timestamps(Instant.now())
                 .success(true)
                 .message("Get current user successfully")
-                .payload(userService.getUser())
+                .payload(userService.getUser().toResponse())
                 .build();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
