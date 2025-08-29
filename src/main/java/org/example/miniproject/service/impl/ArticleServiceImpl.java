@@ -40,6 +40,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Transactional
     public ArticleResponse createArticle(ArticleRequest request) {
 
+        if (request.getCategoryIds().isEmpty()) {
+            throw new NotFoundException("At least one category is required");
+        }
         Article article = Article.builder().build();
         article.setTitle(request.getTitle().trim());
         article.setDescription(request.getDescription().trim());
@@ -62,8 +65,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article getArticleById(Integer articleId) {
-        Integer currentUserId = AuthUtil.getUserIdOfCurrentUser();
-        return articleRepository.findByIdAndAppUserId(articleId, currentUserId)
+        return articleRepository.findById(articleId)
                 .orElseThrow(() -> new NotFoundException("Article '" + articleId + "' Not Found"));
     }
 
@@ -73,10 +75,8 @@ public class ArticleServiceImpl implements ArticleService {
         Sort sortBy = articleProperties == null ?
                 Sort.by(sortedDirection, ArticleProperties.articleId.getProperty()) :
                 Sort.by(sortedDirection, articleProperties.getProperty());
-
-        Integer currentUserId = AuthUtil.getUserIdOfCurrentUser();
         Page<Article> pageOfArticle = articleRepository
-                .findAllByAppUserId(currentUserId, (PageRequest.of(page - 1, size, sortBy)));
+                .findAll( PageRequest.of(page - 1, size, sortBy));
         return itemsAndPaginationResponse(pageOfArticle.map(Article::toResponse));
     }
 
