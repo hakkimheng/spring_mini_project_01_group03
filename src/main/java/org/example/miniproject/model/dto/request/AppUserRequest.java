@@ -18,14 +18,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AppUserRequest {
-    @Schema(description = "Username", example = "John wick")
+    @Schema(description = "Username", example = "JohnWick")
     @NotNull
     @NotBlank
     @Pattern(
-            regexp = "^(?=.{3,20}$)(?!.*[._-]{2})[A-Za-z][A-Za-z0-9._-]*[A-Za-z0-9]$",
-            message = "Username must be 3–20 chars, start with a letter, and can include letters, digits, '.', '_' or '-' without repeats."
+            regexp = "^[A-Za-z][A-Za-z0-9]{2,19}$",
+            message = "Username must be 3–20 characters, start with a letter, and contain only letters and numbers."
     )
     private String username;
+
 
     @Schema(description = "User email", example = "wick@gmail.com")
     @NotNull
@@ -43,7 +44,7 @@ public class AppUserRequest {
     )
     private String password;
 
-    @Schema(description = "User phone number", example = "012 123 123")
+    @Schema(description = "User phone number", example = "+855123123")
     @NotNull
     @NotBlank
     @Size(max = 255)
