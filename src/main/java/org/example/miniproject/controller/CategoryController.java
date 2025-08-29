@@ -3,6 +3,7 @@ package org.example.miniproject.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.example.miniproject.model.dto.request.CategoryRequest;
@@ -31,7 +32,7 @@ public class CategoryController extends BaseResponse{
     @PreAuthorize("hasRole('AUTHOR')")
     @Operation(summary = "Create new category.can be used by only AUTHOR role")
     @PostMapping
-    public ResponseEntity<ApiResponse<CategoryResponse>> createCategory(@RequestBody CategoryRequest categoryRequest){
+    public ResponseEntity<ApiResponse<CategoryResponse>> createCategory(@RequestBody @Valid CategoryRequest categoryRequest){
         return responseEntity(true,"Created new category successfully", HttpStatus.CREATED,categoryService.createCategory(categoryRequest));
     }
 
@@ -39,7 +40,7 @@ public class CategoryController extends BaseResponse{
     @Operation(summary = "Get all categories.can be used by only AUTHOR role")
     @GetMapping
     public ResponseEntity<ApiResponse<ApiResponseWithPagination<CategoryResponse>>> getAllCategory(@RequestParam(defaultValue = "1") @Positive Integer page,
-                                                                                                   @RequestParam(defaultValue = "10") Integer size,
+                                                                                                   @RequestParam(defaultValue = "10") @Positive Integer size,
                                                                                                    @RequestParam(required = false) CategoryProperties categoryProperties,
                                                                                                    @RequestParam(required = false) Sort.Direction direction){
         return responseEntity(true,"Get all categories successfully",HttpStatus.OK,categoryService.getAllCategory(page,size,categoryProperties,direction));
@@ -56,7 +57,7 @@ public class CategoryController extends BaseResponse{
     @PreAuthorize("hasRole('AUTHOR')")
     @Operation(summary = "Update category by id.can be used by only AUTHOR role")
     @PutMapping("/{categoryId}")
-    public ResponseEntity<ApiResponse<CategoryResponse>> updateCategoryById(@RequestParam Integer categoryId, @RequestBody CategoryRequest categoryRequest){
+    public ResponseEntity<ApiResponse<CategoryResponse>> updateCategoryById(@RequestParam Integer categoryId, @RequestBody @Valid CategoryRequest categoryRequest){
         return responseEntity(true,"Get category by id successfully",HttpStatus.OK,categoryService.updateCategoryById(categoryId,categoryRequest));
     }
 
