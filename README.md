@@ -7,12 +7,12 @@ authentication, user management, articles, comments, and categories.
 
 ## 👥 Team Members
 
--   **Heng Chakriya**
--   **Keo Kimleang**
--   **Hak Kimheng**
--   **Oeng Sikeat**
--   **Sroun David**
--   **Y Chanphyrat**
+-   **Heng Chakriya**   →   (**Category-controller**)
+-   **Keo Kimleang**    →   (**Auth-controller**)
+-   **Hak Kimheng**     →   (**Comment-controller**)
+-   **Oeng Sikeat**     →   (**Article-controller**)
+-   **Sroun Davit**     →   (**User-controller**)
+-   **Y Chanphyrat**    →   (**Bookmark-controller**)
 
 ------------------------------------------------------------------------
 
